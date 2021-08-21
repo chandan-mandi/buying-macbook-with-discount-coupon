@@ -28,7 +28,7 @@ document.getElementById('free-delivery').addEventListener('click',function(){
 document.getElementById('paid-delivery').addEventListener('click',function(){
     updatePrice('delivery-cost',20);
 });
-
+// another function for getting cost
 function getComponentCost(component) {
     const componentInput = document.getElementById(component + '-cost');
     const componentNumber = parseInt(componentInput.innerText);
@@ -48,18 +48,23 @@ function calcutaleTotal() {
     return subTotal;
 }
 
-
+// applying promo code 
 document.getElementById('promo-button').addEventListener('click',function(){
     const promoInput = document.getElementById('promo-input');
     const promoInputText = promoInput.value;
+    const promoInputLower = promoInputText.toLowerCase();
 
-    const discount = subTotal / 100;
+    const totalPrice = document.getElementById('total-price');
+    const totalAmount = totalPrice.innerText;
+    const discount = totalAmount / 100;
     const discountTotal = discount * 20;
-    const discountAmount = parseInt(discountTotal);
-    const totalWithDiscount = subTotal - discountAmount;
-    if(promoInputText == "stevekaku"){
+    const discountAmount = parseFloat(discountTotal);
+    const totalWithDiscount = totalAmount - discountAmount;
+    if(promoInputLower == "stevekaku"){
         document.getElementById('discounted-price').innerText = totalWithDiscount;
     } else {
         alert('Please enter a valid promo code');
     }
+    // clear the input field
+    promoInput.value = '';
 })
